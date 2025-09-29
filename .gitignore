@@ -205,3 +205,73 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
+
+
+
+
+######################################################################
+# Build Tools
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+.target
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Compiled class file
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.jar
+*.log
+*.nar
+#*.zip
+*.tar.gz
+*.rar
+# 过滤掉项目下载的包文件
+pkg/mod/
+
+######################################################################
+# IDE
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
+###########################   过滤 Beego 生成的 swagger 相关文件   ###########################################
+**/swagger.zip
+**/swagger/
