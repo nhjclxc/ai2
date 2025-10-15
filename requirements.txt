@@ -62,3 +62,7 @@ typing_extensions @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000g
 urllib3 @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_95v32ztwo_/croot/urllib3_1750775480393/work
 wheel==0.45.1
 zstandard @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_a5_i6g4o6n/croot/zstandard_1731356352787/work
+
+numpy~=2.3.3
+torch~=2.5.1
+matplotlib~=3.10.6
