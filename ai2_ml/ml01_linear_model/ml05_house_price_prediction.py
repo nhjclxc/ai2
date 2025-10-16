@@ -3,8 +3,10 @@
 # 代码来源
 # https://gitee.com/tony_cao/machine-learning/blob/master/regression/linear-regression/boston-house-prediction/house_price_prediction.py
 
+import torch
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 """
 | 列名        | 含义                                                                                          |
@@ -27,9 +29,10 @@ import numpy as np
 """
 if __name__ == "__main__":
 
+    print(torch.cuda.is_available())
     # 1、读取数据
     # house_data = pd.read_csv("ai2_ml/ml01_linear_model/BostonHousing.csv")
-    house_data = pd.read_csv("/Users/lxc20250729/lxc/py/ai2/ai2_ml/ml01_linear_model/BostonHousing.csv")
+    house_data = pd.read_csv("./BostonHousing.csv")
 
     print(house_data, len(house_data), house_data.shape)  # [506 rows x 14 columns] 506
 
@@ -46,12 +49,32 @@ if __name__ == "__main__":
     y = target.values.reshape(-1, 1)  # 确保 y 是二维列向量
 
     # 切分数据
-    X_train = X[:250, :]
-    y_train = y[:250, :]
-    X_test = X[250:, :]
-    y_test = y[250:, :]
+    X_train = X[:450, :]
+    y_train = y[:450, :]
+    X_test = X[450:, :]
+    y_test = y[450:, :]
 
     print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+
+    # 4、创建模型
+    model = LinearRegression()
+
+    # 5、模型训练
+    model.fit(X_train, y_train)
+
+    print("模型训练完成！！！", model.coef_, model.intercept_)
+
+    # 6、预测
+
+    y_pred = model.predict(X_test)
+    mse = np.mean((y_test - y_pred)**2)
+    rmse = np.sqrt(mse)
+    print("MSE:", mse, "RMSE:", rmse)
+
+    diff = y_test - y_pred
+    print(len(y_pred), len(y_test))
+    diff_lt_01 = [ d for d in diff.flatten() if abs(d) < 1]
+    print(len(diff_lt_01), diff_lt_01)
 
 
     pass
