@@ -152,7 +152,7 @@ def test5():
     按某一列分组统计平均房价。
     绘制房价与房间数的散点图。
     """
-    df = pd.read_csv('./BostonHousing.csv')
+    df = pd.read_csv('../../data/BostonHousing.csv')
 
     # 计算相关系数矩阵
     # 计算特征与房价 medv 的相关系数
@@ -207,4 +207,35 @@ if __name__ == '__main__':
 
     test5()
 
+    """
+| 函数                     | axis=0 含义 | axis=1 含义 |
+| ---------------------- | --------- | --------- |
+| `sum`, `mean`, `max` 等 | 对每一列操作    | 对每一行操作    |
+| `drop(axis=0)`         | 删除行       | 删除列       |
+| `apply(axis=0)`        | 对每一列应用函数  | 对每一行应用函数  |
+| `concat(axis=0)`       | 纵向拼接（增加行） | 横向拼接（增加列） |
+axis=0：沿着行方向动 → 所以对列进行计算；
+axis=1：沿着列方向动 → 所以对行进行计算。
+
+
+| 语句                     | 含义            | 方向 | 删除结果       |
+| ---------------------- | ------------- | -- | ---------- |
+| `df.drop('y', axis=0)` | 沿着 **行方向** 操作 | ↓  | 删除 **行 y** |
+| `df.drop('B', axis=1)` | 沿着 **列方向** 操作 | →  | 删除 **列 B** |
+drop的axis参数
+🩸 “axis=0 是行方向 → 删除行”
+🩸 “axis=1 是列方向 → 删除列”
+drop = “沿着某个方向，把那一排砍掉”。
+
+Drop specified labels from rows or columns.
+Remove rows or columns by specifying label names and corresponding axis, or by directly specifying index or column names. When using a multi-index, labels on different levels can be removed by specifying the level. See the user guide   for more information about the now unused levels.
+从行或列中删除指定的标签。
+通过指定标签名称和对应的轴，或者直接指定索引或列名称来删除行或列。
+使用多索引时，可以通过指定级别来删除不同级别的标签。
+
+axis – Whether to drop labels from the index (0 or 'index') or columns (1 or 'columns').
+axis – 是否从索引（0 或“索引”）或列（1 或“列”）中删除标签。
+
+DataFrame的每一行（样本数）称为索引，每一列（特征）称为标签
+    """
     print('\npd.__version__ = ', pd.__version__)

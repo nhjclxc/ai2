@@ -31,8 +31,7 @@ if __name__ == "__main__":
 
     print(torch.cuda.is_available())
     # 1、读取数据
-    # house_data = pd.read_csv("ai2_ml/ml01_linear_model/BostonHousing.csv")
-    house_data = pd.read_csv("./BostonHousing.csv")
+    house_data = pd.read_csv("../../data/BostonHousing.csv")
 
     print(house_data, len(house_data), house_data.shape)  # [506 rows x 14 columns] 506
 
