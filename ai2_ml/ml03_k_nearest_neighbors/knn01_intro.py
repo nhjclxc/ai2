@@ -1,6 +1,6 @@
 import numpy as np
 from collections import Counter
-
+from sklearn.neighbors import KNeighborsClassifier
 
 # knn入门介绍
 # K近邻算法（K-Nearest Neighbors，KNN）是一种基本的分类与回归方法，属于监督学习算法。
@@ -120,10 +120,33 @@ def euclidean_distance(x, y):
     return np.sqrt(np.sum(x - y) ** 2)
 
 
+def test2():
+    # 简单训练集（特征：x1,x2；标签：0/1）
+
+    X_train = np.array([[1, 2], [2, 3], [3, 3], [6, 5], [7, 7], [8, 6]])
+    y_train = np.array([0, 0, 0, 1, 1, 1])
+
+    # 待预测样本
+    X_test = np.array([[3, 2], [7, 5]])
+
+    # 1. 创建 KNN 分类器，K=3
+    knn = KNeighborsClassifier(n_neighbors=3)
+
+    # 2. 训练（KNN其实是懒惰学习，但sklearn需要fit）
+    knn.fit(X_train, y_train)
+
+    # 3. 预测
+    y_pred = knn.predict(X_test)
+
+    print("预测结果111:", y_pred)
+
+    pass
 
 
 if __name__ == "__main__":
 
-    test1()
+    # test1()
+
+    test2()
 
     pass

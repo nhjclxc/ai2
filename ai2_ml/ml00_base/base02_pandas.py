@@ -205,7 +205,16 @@ if __name__ == '__main__':
 
     # test3(df)
 
-    test5()
+    # test5()
+
+    print(df['age'].mean(axis=0))
+    # print(df['age'].mean(axis=1))  # ValueError: No axis named 1 for object type Series
+
+    print(df)
+    df2 = df.drop(0, axis=0)
+    print(df2)
+    df2 = df.drop('age', axis=1)
+    print(df2)
 
     """
 | 函数                     | axis=0 含义 | axis=1 含义 |
@@ -238,4 +247,8 @@ axis – 是否从索引（0 或“索引”）或列（1 或“列”）中删�
 
 DataFrame的每一行（样本数）称为索引，每一列（特征）称为标签
     """
+
+
+
+
     print('\npd.__version__ = ', pd.__version__)

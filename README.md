@@ -6,11 +6,15 @@
 
 
 # 学习视频
-1. [尚硅谷机器学习](https://www.bilibili.com/video/BV1BYe4z5E9z)
+1. [尚硅谷机器学习](https://www.bilibili.com/video/BV1BYe4z5E9z)，[资料](https://pan.baidu.com/s/14Bdq99Fyj_KKcLaVP0ZEAQ?pwd=yyds)
 2. [尚硅谷深度学习](https://www.bilibili.com/video/BV1MRJmzSEaa)
 
 # 可视化网址
 
 # 相关学习网址
 1. 
-2.
+
+
+# 数据集
+1. [kaggle](https://www.kaggle.com/datasets)
+
