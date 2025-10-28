@@ -4,6 +4,7 @@
 # 按 双击 ⇧ 在所有地方搜索类、文件、工具窗口、操作和设置。
 import torch
 
+
 def print_hi(name):
     # 在下面的代码行中使用断点来调试脚本。
     print(f'Hi, {name}')  # 按 ⌘F8 切换断点。
@@ -11,9 +12,6 @@ def print_hi(name):
 
     print(torch.cuda.is_available())
     print(torch.cuda.device_count())
-
-    x = torch.rand(5, 3)
-    print(x)
 
 
 # 按装订区域中的绿色按钮以运行脚本。
