@@ -240,10 +240,27 @@ scikit-learn（简称 sklearn）是 Python 中最常用的机器学习库之一�
     # ----------------------------------
     xx = X[5]
     y_true = Y[5]
-    y_pred = model.predict(xx.reshape(-1,1))
+    y_pred = model.predict(xx.reshape(-1, 1))
     print(f"x = {xx}, y_true = {y_true}, pred_val = {y_pred}, diff = {y_true - y_pred}, score = {model.score(X, Y)}")
 
+    pass
 
+
+def test4():
+    # 例如，某中学教师想研究学生每周学习时间（小时）与数学考试成绩（0-100分）之间的关系，并预测学生成绩。
+
+    # 自变量，每周学习时长
+    X = [[5], [8], [10], [12], [15], [3], [7], [9], [14], [6]]
+    # 因变量，数学考试成绩
+    y = [55, 65, 70, 75, 85, 50, 60, 72, 80, 58]
+    # 模型定义
+    model = linear_model.LinearRegression()
+    # 模型训练
+    model.fit(X, y)
+    # 预测
+    x_input = [[9], [11]]
+    y_pred = model.predict(x_input)
+    print(f"x_input = {x_input}, y_pred = {y_pred}")
 
     pass
 
@@ -260,8 +277,9 @@ if __name__ == "__main__":
     # xx = np.linspace(20, 30, 10)  # 是 NumPy 用于生成等间距数列的函数, 生成固定数量、均匀间隔的数列
     # print(xx)
 
-    test3()
+    # test3()
 
+    test4()
 
     print("Hello")
 

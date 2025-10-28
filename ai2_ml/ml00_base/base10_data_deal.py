@@ -100,7 +100,7 @@ def test4(df: pd.DataFrame):
 
 if __name__ == "__main__":
 
-    df = pd.read_csv('../../data/BostonHousing.csv')
+    df = pd.read_csv('../../data/ml/BostonHousing.csv')
 
     # test1(df)
     # test2(df)

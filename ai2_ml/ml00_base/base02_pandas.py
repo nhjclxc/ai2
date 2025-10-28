@@ -152,7 +152,7 @@ def test5():
     按某一列分组统计平均房价。
     绘制房价与房间数的散点图。
     """
-    df = pd.read_csv('../../data/BostonHousing.csv')
+    df = pd.read_csv('../../data/ml/BostonHousing.csv')
 
     # 计算相关系数矩阵
     # 计算特征与房价 medv 的相关系数

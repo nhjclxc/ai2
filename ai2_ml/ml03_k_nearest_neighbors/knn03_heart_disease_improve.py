@@ -102,7 +102,7 @@ def feature_deal(heart_disease: pd.DataFrame, *, dropFirstColumn=False):
 
 if __name__ == '__main__':
     # 1、读取数据
-    heart_disease = pd.read_csv('../../data/heart-disease.csv')
+    heart_disease = pd.read_csv('../../data/ml/heart-disease.csv')
     # print(heart_disease.describe(), heart_disease.shape)
 
     # 2、处理数据缺失值

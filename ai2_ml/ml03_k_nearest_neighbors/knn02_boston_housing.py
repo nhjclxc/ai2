@@ -18,7 +18,7 @@ def euclidean_distance(x, y):
 
 if __name__ == "__main__":
 
-    housing_data = pd.read_csv('./../../data/BostonHousing.csv')
+    housing_data = pd.read_csv('../../data/ml/BostonHousing.csv')
     # (506, 14)
     print(housing_data.describe(), housing_data.shape)
 
