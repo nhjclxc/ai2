@@ -268,7 +268,7 @@ def test4():
 if __name__ == "__main__":
     # 线形回归简单案例
 
-    # test1()
+    test1()
 
     # test2()
 
@@ -279,7 +279,7 @@ if __name__ == "__main__":
 
     # test3()
 
-    test4()
+    # test4()
 
     print("Hello")
 
