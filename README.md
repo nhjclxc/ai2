@@ -36,19 +36,29 @@ pip freeze > requirements.txt
 ### 文档
 
 1. [Numpy](https://numpy.org/doc/stable/)、[Numpy中文](https://numpy.com.cn/doc/stable/index.html)
+2. [Pandas](https://pandas.pydata.org/docs/)、[Pandas中文](https://pandas.woshinlper.com/)、[pandas 教程](https://gairuo.com/p/pandas-tutorial)
 
 ### 视频
 
-1. [尚硅谷机器学习](https://www.bilibili.com/video/BV1BYe4z5E9z)
-3. [【莫烦Python】Numpy & Pandas (数据处理教程)](https://www.bilibili.com/video/BV1Ex411L7oT)
-4. [numpy+pandas+matplotlib数据分析](https://www.bilibili.com/video/BV1D9GLzyEL6)
-5. [scipy](https://www.bilibili.com/video/BV1gB4y197dm/)、[sympy]()
-6. [sklearn](https://www.bilibili.com/video/BV1vJ41187hk)、[sklearn上](https://www.bilibili.com/video/BV1Ch411x7xB/)、[sklearn中](https://www.bilibili.com/video/BV1WL4y1H7rD/)、[sklearn下](https://www.bilibili.com/video/BV1Ng411K7H6)
+1. [numpy+pandas+matplotlib数据分析](https://www.bilibili.com/video/BV1D9GLzyEL6), [【python教程】数据分析——numpy、pandas、matplotlib](https://www.bilibili.com/video/BV1hx411d7jb)
+2. [scipy](https://www.bilibili.com/video/BV1gB4y197dm/)、[sympy]()
+3. [sklearn](https://www.bilibili.com/video/BV1vJ41187hk)、[sklearn上](https://www.bilibili.com/video/BV1Ch411x7xB/)、[sklearn中](https://www.bilibili.com/video/BV1WL4y1H7rD/)、[sklearn下](https://www.bilibili.com/video/BV1Ng411K7H6)
+4. [尚硅谷机器学习](https://www.bilibili.com/video/BV1BYe4z5E9z)
 
 ## 03_dl
 
 1. [尚硅谷深度学习](https://www.bilibili.com/video/BV1MRJmzSEaa)
 2.
+
+## 04_nlp
+
+1. [NLP](https://www.bilibili.com/video/BV1k44LzPEhU)
+
+
+## 05_llms
+
+1. 
+2._
 
 # 可视化网址
 
