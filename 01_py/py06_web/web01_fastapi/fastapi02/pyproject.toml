@@ -1,0 +1,14 @@
+[project]
+name = "fastapi02"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.135.3",
+    "uvicorn>=0.43.0",
+]
+
+[tool.uv.workspace]
+members = [
+    "uvtest",
+]
