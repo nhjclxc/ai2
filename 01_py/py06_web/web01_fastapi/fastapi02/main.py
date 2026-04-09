@@ -45,4 +45,8 @@ def create_item(item: Item):
 # uvicorn main:app --reload
 # fastapi dev mian.py
 
-# 激活uv虚拟环境：.venv\Scripts\activate.bat
+# uv venv .venv
+
+# Windows 激活uv虚拟环境：.venv\Scripts\activate.bat
+#  Linux/macOS 激活uv虚拟环境：source .venv/bin/activate
+# uv pip install -r requirements.txt
