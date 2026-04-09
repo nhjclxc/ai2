@@ -1,0 +1,33 @@
+
+# docker-compose down && docker-compose up -d
+
+services:
+# https://docker.aityp.com/image/docker.io/mysql:8.0?platform=linux/arm64
+# docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/mysql:8.0-linuxarm64
+# docker tag  swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/mysql:8.0-linuxarm64  docker.io/mysql:8.0
+  mysql:
+    image: mysql:8.0
+    container_name: mysql8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: mysqldb
+    # network_mode: "host"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysqldata:/var/lib/mysql
+
+#  redis:
+#    image: redis:8.0.2
+#    container_name: redis8.0
+#    user: root
+#    ports:
+#      - "6379:6379"
+#    command: >
+#      redis-server
+#      --requirepass root123
+#      --bind 0.0.0.0
+#      --protected-mode no
+#    volumes:
+#      - ./redis-data:/data
+#    restart: unless-stopped

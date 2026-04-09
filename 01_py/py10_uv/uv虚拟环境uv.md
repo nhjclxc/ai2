@@ -1,3 +1,25 @@
+
+
+```
+## 1️⃣ 初始化项目
+uv init myapp
+cd myapp
+## 2️⃣ 创建虚拟环境
+uv venv
+## 3️⃣ 激活环境
+# Windows
+.venv\Scripts\activate
+# Linux/macOS
+source .venv/bin/activate
+## 4️⃣ 安装依赖
+uv add fastapi
+## 5️⃣ 运行代码
+uv run python main.py
+```
+
+
+
+
 下面给你一套**从入门 → 进阶 → 实战 → 生产级**的完整指南，围绕 uv 的真实使用场景来讲（不是零碎命令，而是完整开发流程）。
 
 ---
