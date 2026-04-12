@@ -55,3 +55,5 @@ async def upload_file(file: Annotated[UploadFile, File()]):
 async def userUploadFile(username: Annotated[str, Form()], file: Annotated[UploadFile, File()]):
     print(f"username: {username}, file: {file.filename}")
     return {"filename": file.filename}
+
+

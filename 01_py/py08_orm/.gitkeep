@@ -1,0 +1,381 @@
+好，这个我给你讲一版**“能真正用在项目里的 SQLAlchemy”**，不是那种只会 CRUD 的入门教程。
+
+---
+
+# 🧠 一、SQLAlchemy 到底是什么？
+
+👉 它其实分两层：
+
+### 1️⃣ Core（底层 SQL 工具）
+
+* 类似“高级版 SQL 拼接器”
+* 更接近数据库本身
+
+### 2️⃣ ORM（你常用的）
+
+* 用 Python 类映射数据库表
+* 面向对象操作数据库
+
+👉 一句话理解：
+
+> SQLAlchemy = ORM + SQL 工具 + 连接管理 + 事务系统
+
+---
+
+# 🏗️ 二、核心概念（必须搞懂）
+
+---
+
+## 1️⃣ Engine（引擎）
+
+👉 数据库连接入口
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///test.db")
+```
+
+👉 async：
+
+```python
+from sqlalchemy.ext.asyncio import create_async_engine
+
+engine = create_async_engine("sqlite+aiosqlite:///test.db")
+```
+
+---
+
+## 2️⃣ Session（会话 ⭐最重要）
+
+👉 你所有数据库操作都通过它
+
+```python
+from sqlalchemy.orm import sessionmaker
+
+SessionLocal = sessionmaker(bind=engine)
+session = SessionLocal()
+```
+
+👉 async：
+
+```python
+from sqlalchemy.ext.asyncio import AsyncSession
+
+async with AsyncSession(engine) as session:
+    ...
+```
+
+👉 可以理解为：
+
+> **一次数据库“上下文”**
+
+---
+
+## 3️⃣ Model（模型）
+
+```python
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+class Base(DeclarativeBase):
+    pass
+
+class User(Base):
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+```
+
+👉 这就是 ORM 的核心：
+
+> Python 类 = 数据库表
+
+---
+
+## 4️⃣ CRUD 操作
+
+### 插入
+
+```python
+user = User(name="Tom")
+session.add(user)
+session.commit()
+```
+
+---
+
+### 查询
+
+```python
+from sqlalchemy import select
+
+stmt = select(User).where(User.name == "Tom")
+result = session.execute(stmt)
+users = result.scalars().all()
+```
+
+👉 SQLAlchemy 2.0 推荐写法（很重要）
+
+---
+
+### 更新
+
+```python
+user.name = "Jerry"
+session.commit()
+```
+
+---
+
+### 删除
+
+```python
+session.delete(user)
+session.commit()
+```
+
+---
+
+# 🔗 三、关系映射（Agent 场景必用）
+
+Agent 系统里最常见的关系：
+
+* 用户 → 多条对话
+* 对话 → 多条消息
+
+---
+
+## 一对多
+
+```python
+from sqlalchemy.orm import relationship
+
+class User(Base):
+    __tablename__ = "users"
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    messages = relationship("Message", back_populates="user")
+
+
+class Message(Base):
+    __tablename__ = "messages"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+
+    user = relationship("User", back_populates="messages")
+```
+
+---
+
+# ⚡ 四、异步（Agent 必学）
+
+👉 Agent 系统必须 async（不然性能炸）
+
+---
+
+## 完整 async 示例
+
+```python
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
+
+engine = create_async_engine("postgresql+asyncpg://user:pass@localhost/db")
+
+AsyncSessionLocal = sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
+
+async def get_users():
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(select(User))
+        return result.scalars().all()
+```
+
+---
+
+# 🔥 五、事务（非常重要）
+
+Agent 很容易失败 → 必须用事务
+
+```python
+try:
+    session.add(user)
+    session.commit()
+except:
+    session.rollback()
+```
+
+👉 async：
+
+```python
+async with session.begin():
+    session.add(user)
+```
+
+---
+
+# 🚀 六、在 FastAPI 中的标准用法
+
+---
+
+## 依赖注入
+
+```python
+from fastapi import Depends
+
+def get_db():
+    with SessionLocal() as session:
+        yield session
+```
+
+---
+
+## 使用
+
+```python
+@app.get("/users")
+def read_users(db: Session = Depends(get_db)):
+    return db.query(User).all()
+```
+
+👉 async 版本类似
+
+---
+
+# 🧠 七、SQLAlchemy 在 Agent 里的典型设计
+
+给你一个真实结构👇
+
+---
+
+## 表设计
+
+### 1️⃣ 用户表
+
+* id
+* name
+
+### 2️⃣ 会话表（session）
+
+* id
+* user_id
+
+### 3️⃣ 消息表（message）
+
+* role（user / assistant）
+* content
+
+### 4️⃣ 任务表（task）
+
+* status（running / done）
+* result
+
+---
+
+👉 关系：
+
+```
+User → Session → Message
+                 ↓
+                Task
+```
+
+---
+
+# ⚡ 八、性能优化（进阶）
+
+---
+
+## 1️⃣ 批量插入
+
+```python
+session.bulk_save_objects([...])
+```
+
+---
+
+## 2️⃣ 预加载（避免 N+1）
+
+```python
+from sqlalchemy.orm import selectinload
+
+stmt = select(User).options(selectinload(User.messages))
+```
+
+---
+
+## 3️⃣ 连接池（默认已支持）
+
+---
+
+# ⚠️ 九、常见坑（你一定会踩）
+
+---
+
+### ❌ 忘记 commit
+
+👉 数据不会保存
+
+---
+
+### ❌ session 乱用
+
+👉 导致连接泄漏
+
+---
+
+### ❌ 同步/异步混用
+
+👉 会直接报错
+
+---
+
+### ❌ 懒加载导致性能炸
+
+👉 用 `selectinload`
+
+---
+
+# 🎯 十、给你的建议（非常关键）
+
+结合你做 AI Agent：
+
+---
+
+## 👉 推荐你这样用
+
+👉 简单场景：
+
+* 用 SQLModel 写模型
+
+👉 复杂场景：
+
+* 用 SQLAlchemy（关系 / 查询）
+
+---
+
+## 👉 技术组合（工业级）
+
+```
+FastAPI
++ SQLAlchemy (async)
++ PostgreSQL
++ Redis（缓存 / memory）
+```
+
+---
+
+# 🚀 如果你要更实战
+
+我可以直接给你一套：
+
+* ✅ Agent 数据库完整建模（memory / tool / task）
+* ✅ SQLAlchemy async 实战代码
+* ✅ 可直接运行的 FastAPI 项目结构
+
+你直接说一句：
+
+👉「给我一个SQLAlchemy实战项目（Agent版）」
+
+我给你一套可以写进简历的 👍

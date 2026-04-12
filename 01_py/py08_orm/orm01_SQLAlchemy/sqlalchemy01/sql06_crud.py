@@ -4,13 +4,12 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, APIRouter, Query, Depends, HTTPException, Body
 from pydantic import BaseModel, Field
-from sqlalchemy import Column, Integer, String, update, select, Sequence
+from sqlalchemy import Column, Integer, String, update, select, Sequence, func
 from sqlalchemy.dialects.mysql import insert
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from sqlalchemy.orm import declarative_base
 from typing import Annotated, List, Dict, Optional
 
-from sqlalchemy.sql.functions import user
 
 from sql02_database_async_connect import MYSQL_ASYNC_ENGINE, MYSQL_ASYNC_AsyncSessionLocal
 
@@ -173,6 +172,7 @@ async def select_user_by_cond(user_cond: User) -> Sequence[User]:
         if not user_cond:
             raise HTTPException(status_code=404, detail=f"User {user_cond} not found")
 
+        # 1、构造查询条件
         stmt = select(User)
         if user_cond.id:
             stmt = stmt.where(User.id == user_cond.id)
@@ -187,6 +187,44 @@ async def select_user_by_cond(user_cond: User) -> Sequence[User]:
         users: Sequence[User] = result.scalars().all()
         return users
 
+
+async def select_user_by_cond_page(user_cond: User, page: int = 1, page_size: int = 10) -> dict:
+    async with get_session(AsyncSessionLocal) as session:  # type: AsyncSession
+        if not user_cond:
+            raise HTTPException(status_code=404, detail=f"User {user_cond} not found")
+
+        # 1、构造查询条件
+        stmt = select(User)
+        if user_cond.id:
+            stmt = stmt.where(User.id == user_cond.id)
+        if user_cond.name:
+            stmt = stmt.where(User.name == user_cond.name)
+        if user_cond.age is not None and user_cond.age > 0:
+            stmt = stmt.where(User.age == user_cond.age)
+        if user_cond.addr:
+            stmt = stmt.where(User.addr == user_cond.addr)
+
+        # 2、查询总条数
+        count_stmt = select(func.count()).select_from(stmt.subquery())
+        # | 方法                  | 返回什么                    |
+        # | ------------------- | ----------------------- |
+        # | `session.execute()` | 返回 **Result 对象（完整结果集）** |
+        # | `session.scalar()`  | 返回 **单个值（第一行第一列）**      |
+        total = session.scalar(count_stmt)
+
+        # 3、构造分页语句
+        offest = (page - 1 ) * page_size
+        stmt = stmt.offset(offest).limit(page_size)
+
+        # 4、查询分页数据
+        result = await session.execute(stmt)
+        users: Sequence[User] = result.scalars().all()
+        return {
+            "data": users,
+            "total": total,
+            "page": page,
+            "page_size": page_size,
+        }
 
 
 
@@ -213,6 +251,10 @@ class RequestUser(BaseModel):
     addr: str | None = Field(default=None)
     email: str | None = Field(default=None)
     description: str | None = Field(default=None)
+
+    # 实现分页查询
+    page: int = Field(default=1)
+    page_size: int = Field(default=10)
 
     def to_orm(self) -> User:
         # entity 与 model 的字段一摸一样时使用以下方法即可
@@ -364,7 +406,7 @@ async def select_r2(req_user: Annotated[RequestUser, Body()]):
 
     print(f"len(req_user): {req_user}")
     orm_user = req_user.to_orm()
-    res = await select_user_by_cond(orm_user)
+    res = await select_user_by_cond(orm_user, req_user.page, req_user.page_size)
 
     return {
         "code": 200,

@@ -24,6 +24,7 @@ uv pip freeze > requirements.txt
 uv lock
 ## 安装依赖
 pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 
