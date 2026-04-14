@@ -1,5 +1,3 @@
-
-
 ```
 ## 1️⃣ 初始化项目
 uv init orm01_SQLAlchemy
@@ -12,10 +10,10 @@ uv venv
 # Linux/macOS
 source .venv/bin/activate
 ## 4️⃣ 安装依赖
-pip install "fastapi[standard]"
-uv add uvicorn 
+pip install "fastapi[standard]" uvicorn
 uv add flask flask_sqlalchemy
 uv add sqlalchemy pymysql mysqlclient aiomysql greenlet
+uv add "python-jose" "passlib[bcrypt]"
 ## 5️⃣ 运行代码
 uv run python main.py
 ## 6️⃣ 输出当前依赖
@@ -26,22 +24,3 @@ uv lock
 pip install -r requirements.txt
 uv pip install -r requirements.txt
 ```
-
-
-
-
-
-
-
-https://docs.sqlalchemy.org.cn/en/20/
-
-
-https://sqlalchemy.flask.org.cn/en/3.1.x/
-
-
-https://www.bilibili.com/video/BV1Gz4y1P76z/
-
-
-https://github.com/OpenDocCN/py-docs-zh/tree/master/docs/sqlalch_20
-
-
