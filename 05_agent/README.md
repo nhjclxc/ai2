@@ -18,3 +18,15 @@
 https://www.bilibili.com/video/BV19m411d73i
 
 
+# langchain
+- https://github.com/langchain-ai
+- https://github.com/langchain-ai/langchain
+- https://www.langchain.com.cn/
+- https://modelengine.csdn.net/690b1de85511483559e271d2.html
+- https://xuqiwei1986.feishu.cn/wiki/UxHSw4czXiXd31kSz1Bc5Njcn5c
+- https://cloud.tencent.com/developer/article/2379888
+- https://zhuanlan.zhihu.com/p/1975217069487313790
+- [LangChain 接入 DeepSeek 最佳实践 (Python)](https://deepseekhubs.com/zh/blog/langchain)
+
+
+

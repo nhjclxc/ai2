@@ -1,0 +1,44 @@
+train开始：2024-01-21 13:00:45.972941
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   2.58 | Tokens per Sec:    15.2 | Learning Rate: 5.5e-06
+
+eval bleu: 1.459 | mrr : 0.250 | hit_rates: 0.167 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   2.62 | Tokens per Sec:     9.0 | Learning Rate: 2.2e-05
+
+eval bleu: 1.197 | mrr : 0.250 | hit_rates: 0.167 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   1.05 | Tokens per Sec:    15.9 | Learning Rate: 3.9e-05
+
+eval bleu: 0.846 | mrr : 0.250 | hit_rates: 0.167 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.58 | Tokens per Sec:    14.8 | Learning Rate: 5.5e-05
+
+eval bleu: 0.900 | mrr : 0.439 | hit_rates: 0.500 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   1.26 | Tokens per Sec:    17.1 | Learning Rate: 7.2e-05
+
+eval bleu: 1.266 | mrr : 0.400 | hit_rates: 0.333 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.86 | Tokens per Sec:    22.2 | Learning Rate: 8.8e-05
+
+eval bleu: 1.321 | mrr : 0.317 | hit_rates: 0.333 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.37 | Tokens per Sec:    22.8 | Learning Rate: 1.0e-04
+
+eval bleu: 1.311 | mrr : 0.400 | hit_rates: 0.333 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.37 | Tokens per Sec:    22.4 | Learning Rate: 1.2e-04
+
+eval bleu: 1.091 | mrr : 0.550 | hit_rates: 0.500 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.30 | Tokens per Sec:    22.3 | Learning Rate: 1.4e-04
+
+eval bleu: 1.191 | mrr : 0.700 | hit_rates: 0.667 
+
+Epoch Step:      1 | Accumulation Step:   2 | Loss:   0.09 | Tokens per Sec:    21.6 | Learning Rate: 1.5e-04
+
+eval bleu: 0.999 | mrr : 0.767 | hit_rates: 0.833 
+
+PyTorch 模型所在设备：cuda:0
+train 结束：2024-01-21 13:01:41.973223
+train 耗时：0:00:56.000282
