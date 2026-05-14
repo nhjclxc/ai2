@@ -6,7 +6,7 @@ import openai
 from openai import OpenAI
 from langchain_openai import ChatOpenAI
 
-load_dotenv(Path(__file__).parent / ".env")
+load_dotenv(Path(__file__) / ".env")
 
 api_key = os.getenv("OPENAI_API_KEY")
 deepseek_api_key = os.getenv("DEEPSEEK_API_KEY")
