@@ -23,7 +23,7 @@ from langchain_community.document_loaders import CSVLoader, JSONLoader, PyPDFLoa
 def test_csv_loader():
 
     loader = CSVLoader(
-        file_path="./../data/advertising.csv",
+        file_path="../../data/advertising.csv",
         csv_args={
             "delimiter": ",", # 指定csv文件每一个列的分隔符
             "quotechar": '"',   # 使用""去包裹一个整体
@@ -68,7 +68,7 @@ def test_json_loader():
     """
 
     json_loader = JSONLoader(
-        file_path="./../data/json_loader.json",
+        file_path="../../data/json_loader.json",
         jq_schema=".", # 这个是jq语法表示抽取整个json文件的数据
         text_content=False, # 表示抽取的内容是不是字符串
         json_lines=False  # 表示这个文件是一个完整的json文件,而不是jsonL文件
@@ -94,7 +94,7 @@ def test_json_loader2():
     """
 
     json_loader = JSONLoader(
-        file_path="./../data/json_loader.json",
+        file_path="../../data/json_loader.json",
         jq_schema=".hobby", # 这个是jq语法表示抽取整个json文件的数据
         text_content=False, # 表示抽取的内容是不是字符串
         json_lines=False  # 表示这个文件是一个完整的json文件,而不是jsonL文件
@@ -121,7 +121,7 @@ def test_json_loader3():
     """
 
     json_loader = JSONLoader(
-        file_path="./../data/json_loader_lines.jsonl",
+        file_path="../../data/json_loader_lines.jsonl",
         jq_schema=".", # 这个是jq语法表示抽取整个json文件的数据
         text_content=False, # 表示抽取的内容是不是字符串
         json_lines=True  # 表示这个文件是一个完整的json文件,而不是jsonL文件
@@ -147,7 +147,7 @@ def test_json_loader5():
     """
 
     json_loader = JSONLoader(
-        file_path="./../data/json_loader_list.json",
+        file_path="../../data/json_loader_list.json",
         jq_schema=".[].name", # 这个是jq语法表示抽取整个json文件的数据
         text_content=False, # 表示抽取的内容是不是字符串
         json_lines=False  # 表示这个文件是一个完整的json文件,而不是jsonL文件
@@ -177,7 +177,7 @@ def test_pdf_loader():
     # ./../../ai-agent road map.pdf
 
     loader = PyPDFLoader(
-        file_path="./../../ai-agent road map.pdf",
+        file_path="../../../ai-agent road map.pdf",
         # mode: Literal["single", "page"] = "page",
     )
     print(loader)
@@ -199,7 +199,7 @@ def test_pdf_loader():
 def test_text_loader():
 
     loader = TextLoader(
-        file_path="./../data/test_loader.txt",
+        file_path="../../data/test_loader.txt",
         encoding="utf-8",
     )
     # TextLoader 返回的数据只有一个itme,即会全部返回所有txt文件的内容
@@ -222,7 +222,7 @@ def test_text_loader_split():
     # 如果文档太大则太占用内存,因此要使用文档分割器 RecursiveCharacterTextSplitter 对大文档进行分割
 
     loader = TextLoader(
-        file_path="./../data/test_loader.txt",
+        file_path="../../data/test_loader.txt",
         encoding="utf-8",
     )
     data = loader.load()

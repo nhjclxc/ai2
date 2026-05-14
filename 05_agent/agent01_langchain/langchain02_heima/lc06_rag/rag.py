@@ -11,9 +11,9 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda, RunnableWithMessageHistory
 from langchain_core.output_parsers import StrOutputParser
 
-from lc06_rag import config_data
-from lc06_rag.knowledge_base import KnowledgeBaseService
-from lc06_rag.file_history_store import FileChatMessageHistory
+from langchain02_heima.lc06_rag import config_data
+from langchain02_heima.lc06_rag.knowledge_base import KnowledgeBaseService
+from langchain02_heima.lc06_rag.file_history_store import FileChatMessageHistory
 
 def print_prompt(x):
     print("=" * 50)

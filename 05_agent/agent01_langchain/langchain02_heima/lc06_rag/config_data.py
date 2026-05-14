@@ -5,7 +5,7 @@
 # Module    : config_data.py
 # explain   : 项目的一些配置
 
-from lc00_core.model_helper import get_chat_openai, get_embedding_model
+from langchain02_heima.lc00_core.model_helper import get_chat_openai, get_embedding_model
 
 
 

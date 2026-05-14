@@ -7,11 +7,11 @@
 from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompt_values import PromptValue
-from langchain_core.prompts import ChatMessagePromptTemplate, ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.vectorstores import InMemoryVectorStore
 
-from lc00_core.model_helper import get_chat_openai, get_embedding_model
+from langchain02_heima.lc00_core.model_helper import get_chat_openai, get_embedding_model
 
 # 本文件基于langchian15_基于向量检索构建提示词.py，为的是 实现向量存储对象加入langchain调用链‘
 # 即 RunnablePassthrough 的使用

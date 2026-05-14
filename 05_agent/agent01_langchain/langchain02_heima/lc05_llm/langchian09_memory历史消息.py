@@ -6,14 +6,13 @@
 # explain   :
 from typing import Sequence
 
-from langchain_classic.chains.summarize.map_reduce_prompt import prompt_template
 from langchain_core.chat_history import InMemoryChatMessageHistory, BaseChatMessageHistory
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompt_values import PromptValue
 from langchain_core.runnables import RunnableWithMessageHistory, RunnableLambda
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from lc00_core.model_helper import get_chat_openai
+from langchain02_heima.lc00_core.model_helper import get_chat_openai
 
 def print_prompt(x: PromptValue):
     print("="*20, " 打印当前提示词 ", "="*20)

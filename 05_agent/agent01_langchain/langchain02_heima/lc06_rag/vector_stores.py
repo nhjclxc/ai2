@@ -9,7 +9,7 @@
 
 from langchain_core.vectorstores import InMemoryVectorStore, VectorStoreRetriever
 
-from lc06_rag.config_data import embed_model
+from langchain02_heima.lc06_rag.config_data import embed_model
 
 
 class VectorStoreService:

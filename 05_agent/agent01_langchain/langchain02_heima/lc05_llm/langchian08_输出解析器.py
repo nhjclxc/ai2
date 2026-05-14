@@ -5,12 +5,10 @@
 # Module    : langchian08_输出解析器.py
 # explain   :
 from langchain_core.messages import AIMessage
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder, FewShotPromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 
-from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-
-from lc00_core.model_helper import get_chat_openai
+from langchain02_heima.lc00_core.model_helper import get_chat_openai
 
 
 # StrOutputParser

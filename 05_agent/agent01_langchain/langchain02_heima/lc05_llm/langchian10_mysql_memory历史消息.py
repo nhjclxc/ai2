@@ -2,10 +2,8 @@
 # -*- coding: utf-8 -*-
 # Author    : LuoXianchao
 # Datetime  : 2026/5/6 21:07
-# Module    : langchian10_redis_memory历史消息.py
+# Module    : langchian09_memory历史消息.py
 # explain   :
-import json
-from io import StringIO
 
 from typing import Sequence
 
@@ -18,11 +16,9 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import messages_from_dict, message_to_dict, BaseMessage, HumanMessage, AIMessage
 
 from sqlalchemy import Column, Integer, String, JSON, select, delete, DateTime
-from sqlalchemy.orm.session import Session
 
-from lc00_core.model_helper import get_chat_openai
-from lc05_llm.mysqldb.db_mysql_sync import Base, init_db, get_session_local, get_session
-from lc05_llm.mysqldb.db_redis_sync import RedisClient
+from langchain02_heima.lc00_core.model_helper import get_chat_openai
+from langchain02_heima.lc05_llm.mysqldb.db_mysql_sync import Base, get_session_local, get_session
 
 
 def print_prompt(x: PromptValue):
@@ -121,36 +117,21 @@ class MySQLChatMessageHistory(BaseChatMessageHistory):
         db_messages = list(reversed(db_messages))
 
         build_messages = []
-        build_redis_messages = []
-        current_mysql_token = 0
-        current_redis_token = 0
-        build_mysql_flag = False
-        build_redis_flag = False
+        current_token = 0
 
         # 3️⃣ token裁剪
         for msg in db_messages:
 
             token = len(self.encoding.encode(msg.content))
 
-            if current_redis_token + token < self.max_token:
-                current_redis_token += token
-                build_redis_messages.append(msg)
-            else:
-                build_redis_flag = True
-
-            if current_mysql_token + token < self.max_token:
-                current_mysql_token += token
-                build_messages.append(msg)
-            else:
-                build_mysql_flag = True
-
-            if build_mysql_flag and build_redis_flag:
+            if current_token + token > self.max_token:
                 break
+
+            current_token += token
+            build_messages.append(msg)
 
         # 4️⃣ 恢复时间顺序
         build_messages.reverse()
-
-        # 存数据库的同时存redis,以保持热数据
 
         # 5️⃣ 构造插入数据库的数据格式
         insert_messages = [ChatHistory(session_id=self.session_id, message=message_to_dict(m)) for m in build_messages]
@@ -262,33 +243,6 @@ def test_tokenizer():
     # print(tokens)
     print(len(tokens))
     pass
-
-
-def gen_redis_key(session_id: str) -> str:
-    return f"chat:history:{session_id}"
-
-def test_redis():
-    session_id = "session001"
-    redis_client = RedisClient()
-    # msg0 = SystemMessage("你是一个聊天小助手")
-    # mgs1 = HumanMessage("你是什么模型？")
-    # mgs2 = AIMessage("我是基于 OpenAI GPT-5.5 的 ChatGPT。")
-    # mgs3 = HumanMessage("你最拿手的活是什么？简单一句话回答")
-    # mgs4 = AIMessage("我最拿手的是把复杂技术问题快速定位清楚，并直接给出能落地的解决方案。")
-    # messages = [msg0, mgs1, mgs2, mgs3, mgs4]
-    # for msg in messages:
-    #     msg_json_str = json.dumps(message_to_dict(msg), encoding="utf-8", ensure_ascii=False)
-    #     print(msg_json_str)
-    #     redis_client.lpush(gen_redis_key(session_id), msg_json_str)
-
-    print("redis存储数据: ")
-    all_msgs = redis_client.lrange(gen_redis_key(session_id))
-    all_msgs_dict = []
-    for msg in all_msgs:
-        all_msgs_dict.append(json.loads(msg))
-
-    all_messages = messages_from_dict(all_msgs_dict)
-    print(all_messages, type(all_messages), type(all_messages[0]) if len(all_messages) > 0 else None)
 
 
     pass

@@ -4,13 +4,8 @@
 # Datetime  : 2026/4/29 21:16
 # Module    : langchian06_通用提示词模板.py
 # explain   :
-from langchain_classic.chains.constitutional_ai.prompts import examples
-from langchain_classic.chains.summarize.map_reduce_prompt import prompt_template
-from langchain_core.prompt_values import PromptValue
 
-from lc00_core.model_helper import get_chat_openai
-
-from langchain_core.prompts import ChatPromptTemplate, FewShotPromptTemplate
+from langchain02_heima.lc00_core.model_helper import get_chat_openai
 
 
 # 1、PromptTemplate
@@ -49,8 +44,6 @@ def prompt_base():
     # chain = prompt_text |
 
 # prompt_base()
-
-from langchain_core.prompts import PromptTemplate
 
 
 # FewShotPromptTemplate(
@@ -252,7 +245,7 @@ format 和 invoke 方法
 
 """
 
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import SystemMessage
 # 消息占位符 ，必须要使用 invoke 动态注入
 from langchain_core.prompts import MessagesPlaceholder
 

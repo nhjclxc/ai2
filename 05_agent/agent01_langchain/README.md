@@ -4,6 +4,7 @@
 
 
 - [langchain官方接口文档](https://reference.langchain.com/python/langchain/overview)
+- [langchain-github](https://github.com/langchain-ai/langchain)
 - [langchain官方接口文档](https://docs.langchain.com/)
 - [langchain官方接口文档 - python](https://docs.langchain.com/oss/python/deepagents/overview)
 

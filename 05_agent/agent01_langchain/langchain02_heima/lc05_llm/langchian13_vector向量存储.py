@@ -7,7 +7,7 @@
 from langchain_core.documents import Document
 from langchain_core.vectorstores import InMemoryVectorStore
 
-from lc00_core.model_helper import get_embedding_model
+from langchain02_heima.lc00_core.model_helper import get_embedding_model
 
 
 # 存储向量 add_document

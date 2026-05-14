@@ -15,15 +15,19 @@ from openai import OpenAI
 from langchain_openai import ChatOpenAI
 from langchain_community.embeddings import DashScopeEmbeddings
 
-load_dotenv(Path(__file__).parent.with_name(".env"))
+load_dotenv(Path(__file__).parent.parent.with_name(".env"))
 openai_api_key = os.getenv("OPENAI_API_KEY")
 qwen_api_key = os.getenv("QWEN_API_KEY")
 base_url = "https://dashscope.aliyuncs.com/compatible-mode/v1"
 url = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 model_chat = "qwen-plus"
+model_chat = "qwen3.6-plus"
 
+HTTPS_PROXY = os.getenv("HTTPS_PROXY")
+if HTTPS_PROXY:
+    os.environ["HTTPS_PROXY"] = HTTPS_PROXY
 # v2RayN
-os.environ["HTTPS_PROXY"] = "http://127.0.0.1:10808"
+# os.environ["HTTPS_PROXY"] = "http://127.0.0.1:10808"
 # clash
 # os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
 

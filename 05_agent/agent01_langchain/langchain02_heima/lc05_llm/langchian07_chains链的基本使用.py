@@ -5,12 +5,11 @@
 # Module    : langchian07_chains链的基本使用.py
 # explain   :
 from langchain_core.prompt_values import PromptValue
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables.base import Runnable
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 from langchain_core.runnables import RunnableLambda, RunnableSerializable
 
-from lc00_core.model_helper import get_chat_openai
+from langchain02_heima.lc00_core.model_helper import get_chat_openai
 
 """
 

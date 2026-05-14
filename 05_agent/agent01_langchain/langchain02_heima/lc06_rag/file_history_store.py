@@ -54,7 +54,7 @@ class FileChatMessageHistory(BaseChatMessageHistory):
 
 if __name__ == "__main__":
 
-    store = FileChatMessageHistory("./data/history", "session001")
+    store = FileChatMessageHistory("data/history", "session001")
 
 
 

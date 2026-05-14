@@ -10,7 +10,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-from lc00_core.cosine_similarity import get_cos
+from langchain02_heima.lc00_core.cosine_similarity import get_cos
 
 load_dotenv(Path(__file__).parent.with_name(".env"))
 openai_api_key = os.getenv("OPENAI_API_KEY")
