@@ -1,0 +1,22 @@
+
+app:
+  version: dev
+
+log:
+  level: info
+  path: log/app.log
+
+agent:
+  external_data_path: data/external/records.csv
+
+prompt:
+  main_path: prompts/main_prompt.txt
+  rag_summarize_path: prompts/rag_summarize.txt
+  report_path: prompts/report_prompt.txt
+
+rag:
+  chat_model_name: qwen3-max
+  embedding_model_name: text-embedding-v4
+
+chromadb:
+  path: data/chromadb
