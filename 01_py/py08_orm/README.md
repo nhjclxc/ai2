@@ -18,3 +18,4 @@ uv add sqlalchemy pymysql
 uv run python main.py
 ```
 
+pip install --upgrade gradio
